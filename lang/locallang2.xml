@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>module</type>
+		<description>Language labels for extension &quot;privacyguard&quot;</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">		
+			<label index="localconf_title">Delete old files</label>
+			<label index="localconf_description">Deletes old files and directories.</label>
+			
+			<label index="addfields_label_directory">Path:</label>
+			<label index="addfields_label_time">Minimum age of the deleted files / directories:</label>
+			<label index="addfields_label_method">What to delete?</label>
+			
+			<label index="addfields_time_all">All</label>
+			<label index="addfields_time_h">hours</label>
+			<label index="addfields_time_d">days</label>
+			<label index="addfields_time_m">months</label>
+			
+			<label index="addfields_method_delete_directory">Choosen diretory</label>
+			<label index="addfields_method_delete_files">All old files</label>
+			<label index="addfields_method_delete_directories">All old directories ( with content, checks directory age only)</label>			
+			<label index="addfields_method_delete_all">All old files and directories (each with content, checks directory age only)</label>
+			<label index="addfields_method_delete_all_recursive">All old files and directories (checks age of all files and directories recursivly, ALPHA!)</label>
+			
+			<label index="addfields_notice_path_invlaid">Path invalid</label>
+		</languageKey>
+		<languageKey index="de" type="array">		
+			<label index="localconf_title">Alte Dateien löschen</label>
+			<label index="localconf_description">Löscht alte Dateien und Ordner.</label>
+			
+			<label index="addfields_label_directory">Pfad:</label>
+			<label index="addfields_label_time">Mindestalter der zu löschenden Dateien / Ordner</label>
+			<label index="addfields_label_method">Was soll gelöscht werden?</label>
+			
+			<label index="addfields_time_all">Alle</label>
+			<label index="addfields_time_h">Stunden</label>
+			<label index="addfields_time_d">Tage</label>
+			<label index="addfields_time_m">Monate</label>
+			
+			<label index="addfields_method_delete_directory">Der ausgewählte Ordner</label>
+			<label index="addfields_method_delete_files">Alle alten Dateien</label>
+			<label index="addfields_method_delete_directories">Alle alten Ordner (inkl. Inhalte, prüft nur Alter des Ordners)</label>			
+			<label index="addfields_method_delete_all">Alle alten Dateien und Ordner (inkl. Inhalte, prüft nur Alter des Ordners)</label>
+			<label index="addfields_method_delete_all_recursive">Alle alten Dateien und Ordner (prüft das Alter aller Dateien und Ordner rekursiv, ALPHA!)</label>
+			
+			<label index="addfields_notice_path_invlaid">Pfad ungültig</label>
+		</languageKey>
+	</data>
+</T3locallang>
