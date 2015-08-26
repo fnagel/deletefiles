@@ -16,19 +16,11 @@ $EM_CONF[$_EXTKEY] = array(
 	'category' => 'services',
 	'author' => 'Felix Nagel',
 	'author_email' => 'info@felixnagel.com',
-	'shy' => '',
-	'dependencies' => 'scheduler',
-	'conflicts' => '',
-	'priority' => '',
-	'module' => '',
 	'state' => 'beta',
 	'internal' => '',
 	'uploadfolder' => 0,
 	'createDirs' => '',
-	'modify_tables' => '',
 	'clearCacheOnLoad' => 0,
-	'lockType' => '',
-	'author_company' => '',
 	'version' => '0.1.0-dev',
 	'constraints' => array(
 		'depends' => array(
@@ -40,5 +32,3 @@ $EM_CONF[$_EXTKEY] = array(
 	),
 	'suggests' => array(),
 );
-
-?>
