@@ -250,11 +250,15 @@ class DeleteFilesTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask {
 	 * Delete single file
 	 *
 	 * @todo Add FAL index removal
-	 * @todo Add ignore .htaccess
 	 *
 	 * @param string $file
 	 */
 	protected function deleteSingleFile($file) {
+		$filename = basename($file);
+		if ($filename === '.htaccess' || $filename === '.htpasswd') {
+			return;
+		}
+
 		@unlink($file);
 	}
 
