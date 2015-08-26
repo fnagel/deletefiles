@@ -9,6 +9,8 @@ use \TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class DeleteFilesTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask {
 
+	protected $debugging = FALSE;
+
 	/**
 	 * @inheritdoc
 	 *
@@ -137,7 +139,8 @@ class DeleteFilesTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask {
 	 * @return bool
 	 */
 	protected function deleteItems($items) {
-		$flag = FALSE;
+		// TODO: better delete error handling
+		$flag = TRUE;
 
 		foreach ($items as $item) {
 			if ($this->debugging) {
@@ -151,14 +154,14 @@ class DeleteFilesTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask {
 						break;
 
 					case 'delete_files':
-						@unlink($item);
+						$this->deleteSingleFile($item);
 						break;
 
 					case 'delete_all':
 						if (is_dir($item)) {
 							$this->recursiveRemoveDirectory($item);
 						} else {
-							@unlink($item);
+							$this->deleteSingleFile($item);
 						}
 						break;
 
@@ -168,7 +171,7 @@ class DeleteFilesTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask {
 						if (is_dir($item)) {
 							@rmdir($item);
 						} else {
-							@unlink($item);
+							$this->deleteSingleFile($item);
 						}
 						break;
 
@@ -176,8 +179,6 @@ class DeleteFilesTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask {
 				}
 			}
 		}
-		// TODO: better delete error handling
-		$flag = TRUE;
 
 		return $flag;
 	}
@@ -246,19 +247,36 @@ class DeleteFilesTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask {
 	}
 
 	/**
+	 * Delete single file
+	 *
+	 * @todo Add FAL index removal
+	 * @todo Add ignore .htaccess
+	 *
+	 * @param string $file
+	 */
+	protected function deleteSingleFile($file) {
+		@unlink($file);
+	}
+
+
+	/**
+	 * Delete directory recursive
+	 *
 	 * @param string $dir
 	 */
 	protected function recursiveRemoveDirectory($dir) {
 		$objects = scandir($dir);
+
 		foreach ($objects as $object) {
 			if ($object != '.' && $object != '..') {
 				if (filetype($dir . DIRECTORY_SEPARATOR . $object) === 'dir') {
 					$this->recursiveRemoveDirectory($dir . DIRECTORY_SEPARATOR . $object);
 				} else {
-					@unlink($dir . DIRECTORY_SEPARATOR . $object);
+					$this->deleteSingleFile($dir . DIRECTORY_SEPARATOR . $object);
 				}
 			}
 		}
+
 		reset($objects);
 		@rmdir($dir);
 	}
