@@ -1,6 +1,12 @@
 <?php
+
 return array(
-	'tx_deletefiles_cleaner' => t3lib_extMgm::extPath('deletefiles', 'tasks/class.tx_deletefiles_cleaner.php'),
-	'tx_deletefiles_cleaner_addfields' => t3lib_extMgm::extPath('deletefiles', 'tasks/class.tx_deletefiles_cleaner_addFields.php'),
+	'TYPO3\\DeleteFiles\\Task\\DeleteFilesTask' =>
+		\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath(
+			'deletefiles', 'Classes/Task/DeleteFilesTask.php'
+		),
+	'TYPO3\\DeleteFiles\\Task\\DeleteFilesAdditionalFieldProvider' =>
+		\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath(
+			'deletefiles', 'Classes/Task/DeleteFilesAdditionalFieldProvider.php'
+		),
 );
-?>
