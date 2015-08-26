@@ -12,14 +12,11 @@ http://typo3.org/extensions/repository/view/deletefiles
 ToDo
 ----
 
-* Make TYPO3 7.x compatible
-* Testing after rework
-* Remove file from FAL
+* Test in TYPO3 7.x
 * Migrate docs to ReSt
 * Upgrade guide 
 	* Clear cache in Install Tool
 	* Re-add all tasks!
-* Exclude .htaccess files!
 
 
 Contribution
