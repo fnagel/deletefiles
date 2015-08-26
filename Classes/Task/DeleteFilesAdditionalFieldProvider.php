@@ -174,12 +174,7 @@ class DeleteFilesAdditionalFieldProvider implements \TYPO3\CMS\Scheduler\Additio
 		$submittedData['deletefiles_time'] = trim($submittedData['deletefiles_time']);
 
 		$path = $submittedData['deletefiles_directory'];
-		if (
-			!(strlen($path) > 0 &&
-			file_exists(PATH_site . $path) &&
-			GeneralUtility::isAllowedAbsPath(PATH_site . $path) &&
-			GeneralUtility::validPathStr($path))
-		) {
+		if (!(strlen($path) > 0 && is_dir(PATH_site . $path) && GeneralUtility::isAllowedAbsPath(PATH_site . $path))) {
 			$schedulerModule->addMessage(
 				sprintf($this->translate('addfields_notice_path_invalid'), $path),
 				FlashMessage::ERROR
