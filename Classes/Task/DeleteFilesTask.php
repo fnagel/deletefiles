@@ -3,13 +3,32 @@
 namespace TYPO3\DeleteFiles\Task;
 
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use \TYPO3\CMS\Core\Resource\ResourceFactory;
 
 /**
  * Class DeleteFilesTask
  */
 class DeleteFilesTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask {
 
+	/**
+	 * @var bool
+	 */
 	protected $debugging = FALSE;
+
+	/**
+	 * @var string
+	 */
+	public $deletefiles_directory;
+
+	/**
+	 * @var string
+	 */
+	public $deletefiles_time;
+
+	/**
+	 * @var string
+	 */
+	public $deletefiles_method;
 
 	/**
 	 * @inheritdoc
@@ -19,87 +38,96 @@ class DeleteFilesTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask {
 	public function execute() {
 		$this->cleanValues();
 
+		if (!$this->isPathValid()) {
+			$this->log('Invalid path: ' . $this->deletefiles_directory);
+			return FALSE;
+		}
+
 		return $this->startCleaning();
+	}
+
+	/**
+	 * Check if given path is valid
+	 *
+	 * @return bool
+	 */
+	public function isPathValid() {
+		$path = $this->deletefiles_directory;
+
+		return (
+			strlen($path) > 0 &&
+			file_exists(PATH_site . $path) &&
+			GeneralUtility::isAllowedAbsPath(PATH_site . $path) &&
+			GeneralUtility::validPathStr($path)
+		);
 	}
 
 	/**
 	 * @return bool
 	 */
 	protected function startCleaning() {
-		$flag = FALSE;
 		$items = array();
 		$itemsToDelete = array();
+		$path = PATH_site . trim($this->deletefiles_directory, DIRECTORY_SEPARATOR);
 
-		$path = $this->deletefiles_directory;
+		// get needed dirs and files
+		$addPath = TRUE;
+		switch ($this->deletefiles_method) {
 
-		if (
-			strlen($path) > 0 &&
-			file_exists(PATH_site . $path) &&
-			GeneralUtility::isAllowedAbsPath(PATH_site . $path) &&
-			GeneralUtility::validPathStr($path)
-		) {
-			$path = PATH_site . trim($this->deletefiles_directory, DIRECTORY_SEPARATOR);
+			case 'delete_directory':
+				$items[0] = $path;
+				$addPath = FALSE;
+				break;
 
-			// get needed dirs and files
-			$addPath = TRUE;
-			switch ($this->deletefiles_method) {
+			case 'delete_files':
+				$items = GeneralUtility::getFilesInDir($path);
+				break;
+			case 'delete_directories':
+				$items = GeneralUtility::get_dirs($path);
+				break;
 
-				case 'delete_directory':
-					$items[0] = $path;
-					$addPath = FALSE;
-					break;
+			case 'delete_all':
+				$files = GeneralUtility::getFilesInDir($path);
+				$dirs = GeneralUtility::get_dirs($path);
+				$items = array_merge($files, $dirs);
+				break;
 
-				case 'delete_files':
-					$items = GeneralUtility::getFilesInDir($path);
-					break;
-				case 'delete_directories':
-					$items = GeneralUtility::get_dirs($path);
-					break;
+			case 'delete_all_recursive':
+				// get all files and folders and sort items from deep level to top level
+				$items = array_reverse(
+					GeneralUtility::getAllFilesAndFoldersInPath($items, $path . DIRECTORY_SEPARATOR, '', TRUE)
+				);
+				// remove last array item as its the input $path
+				array_pop($items);
+				$addPath = FALSE;
+				break;
 
-				case 'delete_all':
-					$files = GeneralUtility::getFilesInDir($path);
-					$dirs = GeneralUtility::get_dirs($path);
-					$items = array_merge($files, $dirs);
-					break;
+			default:
+		}
 
-				case 'delete_all_recursive':
-					// get all files and folders and sort items from deep level to top level
-					$items = array_reverse(GeneralUtility::getAllFilesAndFoldersInPath(
-						$items, $path . DIRECTORY_SEPARATOR, '', TRUE)
-					);
-					// remove last array item as its the input $path
-					array_pop($items);
-					$addPath = FALSE;
-					break;
-
-				default:
-			}
-			// check filetime
-			if ($this->deletefiles_time) {
-				$timestamp = $this->getTimestamp();
-				foreach ($items as $item) {
-					if ($addPath) {
-						$item = $path . DIRECTORY_SEPARATOR . $item;
-					}
-					if (filemtime($item) < $timestamp) {
-						$itemsToDelete[] = $item;
-					}
-				}
-			} else {
+		// check filetime
+		if ($this->deletefiles_time) {
+			$timestamp = $this->getTimestamp();
+			foreach ($items as $item) {
 				if ($addPath) {
-					$items = $this->prefixArrayValues($path . DIRECTORY_SEPARATOR, $items);
+					$item = $path . DIRECTORY_SEPARATOR . $item;
 				}
-				$itemsToDelete = $items;
-			}
-
-			if (count($itemsToDelete) > 0) {
-				$flag = $this->deleteItems($itemsToDelete);
-			} else {
-				$flag = TRUE;
-				$this->log('No old files to delete');
+				if (filemtime($item) < $timestamp) {
+					$itemsToDelete[] = $item;
+				}
 			}
 		} else {
-			$this->log('Invalid path: ' . $this->deletefiles_directory);
+			if ($addPath) {
+				$items = $this->prefixArrayValues($path . DIRECTORY_SEPARATOR, $items);
+			}
+			$itemsToDelete = $items;
+		}
+
+		if (count($itemsToDelete) > 0) {
+			$flag = $this->deleteItems($itemsToDelete);
+		} else {
+			$flag = TRUE;
+			$this->log('No old files to delete');
 		}
 
 		return $flag;
@@ -139,44 +167,46 @@ class DeleteFilesTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask {
 	 * @return bool
 	 */
 	protected function deleteItems($items) {
-		// TODO: better delete error handling
+		// @todo: better delete error handling
 		$flag = TRUE;
 
 		foreach ($items as $item) {
-			if ($this->debugging) {
+			if ($this->debugging === TRUE) {
 				$this->log('Use delete method [' . $this->deletefiles_method . '] on ' . $item);
-			} else {
-				switch ($this->deletefiles_method) {
 
-					case 'delete_directory':
-					case 'delete_directories':
+				return TRUE;
+			}
+
+			switch ($this->deletefiles_method) {
+
+				case 'delete_directory':
+				case 'delete_directories':
+					$this->recursiveRemoveDirectory($item);
+					break;
+
+				case 'delete_files':
+					$this->deleteSingleFile($item);
+					break;
+
+				case 'delete_all':
+					if (is_dir($item)) {
 						$this->recursiveRemoveDirectory($item);
-						break;
-
-					case 'delete_files':
+					} else {
 						$this->deleteSingleFile($item);
-						break;
+					}
+					break;
 
-					case 'delete_all':
-						if (is_dir($item)) {
-							$this->recursiveRemoveDirectory($item);
-						} else {
-							$this->deleteSingleFile($item);
-						}
-						break;
+				// this works because non empty (but old) dirs cant be deleted with rmdir in PHP
+				// so we do not need to remove non empty dirs from our items array
+				case 'delete_all_recursive':
+					if (is_dir($item)) {
+						@rmdir($item);
+					} else {
+						$this->deleteSingleFile($item);
+					}
+					break;
 
-					// this works because non empty (but old) dirs cant be deleted with rmdir in PHP
-					// so we do not need to remove non empty dirs from our items array
-					case 'delete_all_recursive':
-						if (is_dir($item)) {
-							@rmdir($item);
-						} else {
-							$this->deleteSingleFile($item);
-						}
-						break;
-
-					default:
-				}
+				default:
 			}
 		}
 
@@ -252,6 +282,8 @@ class DeleteFilesTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask {
 	 * @todo Add FAL index removal
 	 *
 	 * @param string $file
+	 *
+	 * @return void
 	 */
 	protected function deleteSingleFile($file) {
 		$filename = basename($file);
@@ -267,6 +299,8 @@ class DeleteFilesTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask {
 	 * Delete directory recursive
 	 *
 	 * @param string $dir
+	 *
+	 * @return void
 	 */
 	protected function recursiveRemoveDirectory($dir) {
 		$objects = scandir($dir);
