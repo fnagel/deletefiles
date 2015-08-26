@@ -291,9 +291,19 @@ class DeleteFilesTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask {
 			return;
 		}
 
+		// Remove file from FAL if indexed
+		try {
+			$fileObject = ResourceFactory::getInstance()->retrieveFileOrFolderObject($file);
+			if ($fileObject !== NULL) {
+				$fileObject->delete();
+			}
+		} catch (\Exception $exception) {
+			$this->log('Exception ' . $exception->getCode() . ': ' . $exception->getMessage());
+		}
+
+		// Remove file physically
 		@unlink($file);
 	}
-
 
 	/**
 	 * Delete directory recursive
