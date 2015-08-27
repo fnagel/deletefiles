@@ -12,7 +12,7 @@ http://typo3.org/extensions/repository/view/deletefiles
 ToDo
 ----
 
-* Test in TYPO3 7.x
+* Test in TYPO3 6.2
 * Migrate docs to ReSt
 * Upgrade guide 
 	* Clear cache in Install Tool
