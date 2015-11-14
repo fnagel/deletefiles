@@ -279,8 +279,6 @@ class DeleteFilesTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask {
 	/**
 	 * Delete single file
 	 *
-	 * @todo Add FAL index removal
-	 *
 	 * @param string $file
 	 *
 	 * @return void
