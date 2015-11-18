@@ -2,8 +2,7 @@
 
 TYPO3 CMS Extension Delete Files.
 
-This scheduler task helps to maintain your TYPO3 installation and / or 
-to improve the privacy of your customers by deleting old files in specific intervals.
+Scheduler task for deleting old files and folder. Supports FAL.
 
 http://typo3.org/extensions/repository/view/deletefiles 
 

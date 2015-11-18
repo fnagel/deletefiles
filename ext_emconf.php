@@ -12,7 +12,7 @@
 
 $EM_CONF[$_EXTKEY] = array(
 	'title' => 'Delete old files',
-	'description' => 'This scheduler task helps to maintain your TYPO3 installation and / or to improve the privacy of your customers by deleting old files in specific intervals.',
+	'description' => 'Scheduler task for deleting old files and folder. Supports FAL.',
 	'category' => 'services',
 	'author' => 'Felix Nagel',
 	'author_email' => 'info@felixnagel.com',
