@@ -57,3 +57,4 @@ EXT: Delete old files
     Introduction/Index
     Administration/Index
     KnownProblems/Index
+    UpgradeGuide/Index
