@@ -11,25 +11,25 @@
  ***************************************************************/
 
 $EM_CONF[$_EXTKEY] = array(
-	'title' => 'Delete old files',
-	'description' => 'Scheduler task for deleting old files and folder. Supports FAL.',
-	'category' => 'services',
-	'author' => 'Felix Nagel',
-	'author_email' => 'info@felixnagel.com',
-	'state' => 'beta',
-	'internal' => '',
-	'uploadfolder' => 0,
-	'createDirs' => '',
-	'clearCacheOnLoad' => 0,
-	'version' => '1.0.1-dev',
-	'constraints' => array(
-		'depends' => array(
-			'php' => '5.4.0-7.0.99',
-			'typo3' => '6.2.0-7.6.99',
-			'scheduler' => '',
-		),
-		'conflicts' => array(),
-		'suggests' => array(),
-	),
-	'suggests' => array(),
+    'title' => 'Delete old files',
+    'description' => 'Scheduler task for deleting old files and folder. Supports FAL.',
+    'category' => 'services',
+    'author' => 'Felix Nagel',
+    'author_email' => 'info@felixnagel.com',
+    'state' => 'beta',
+    'internal' => '',
+    'uploadfolder' => 0,
+    'createDirs' => '',
+    'clearCacheOnLoad' => 0,
+    'version' => '1.0.1-dev',
+    'constraints' => array(
+        'depends' => array(
+            'php' => '5.4.0-7.0.99',
+            'typo3' => '6.2.0-7.6.99',
+            'scheduler' => '',
+        ),
+        'conflicts' => array(),
+        'suggests' => array(),
+    ),
+    'suggests' => array(),
 );
