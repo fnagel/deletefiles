@@ -11,4 +11,6 @@
 Known problems
 ==============
 
-None so far. Bug reports should be send by email as there is no forge account at the moment.
+None so far.
+
+Bug reports or feature requests: https://github.com/fnagel/deletefiles/issues
