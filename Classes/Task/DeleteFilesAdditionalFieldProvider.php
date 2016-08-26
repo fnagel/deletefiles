@@ -27,8 +27,8 @@ class DeleteFilesAdditionalFieldProvider implements \TYPO3\CMS\Scheduler\Additio
     /**
      * Gets additional fields to render in the form to add/edit a task.
      *
-     * @param array                                                     $taskInfo        Values of the fields from the add/edit task form
-     * @param \TYPO3\DeleteFiles\Task\DeleteFilesTask                   $task            The task object
+     * @param array $taskInfo Values of the fields from the add/edit task form
+     * @param \TYPO3\DeleteFiles\Task\DeleteFilesTask $task The task object
      * @param \TYPO3\CMS\Scheduler\Controller\SchedulerModuleController $schedulerModule
      *
      * @return array

@@ -77,7 +77,6 @@ class DeleteFilesTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
         // get needed dirs and files
         $addPath = true;
         switch ($this->deletefiles_method) {
-
             case 'delete_directory':
                 $items[0] = $path;
                 $addPath = false;
@@ -184,7 +183,6 @@ class DeleteFilesTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
             }
 
             switch ($this->deletefiles_method) {
-
                 case 'delete_directory':
                 case 'delete_directories':
                     $this->recursiveRemoveDirectory($item);
@@ -228,7 +226,6 @@ class DeleteFilesTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
 
         // choose correct time
         switch ($this->deletefiles_time) {
-
             case '1h':
                 $timestamp = mktime(date('H') - 1, date('i'), date('s'), date('m'), date('d'), date('Y'));
                 break;
