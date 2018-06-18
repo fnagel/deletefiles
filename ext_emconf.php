@@ -12,7 +12,7 @@
 
 $EM_CONF[$_EXTKEY] = array(
     'title' => 'Delete old files',
-    'description' => 'Scheduler task for deleting old files and folder. Supports FAL.',
+    'description' => 'Scheduler task for deleting old files and folder. Supports FAL. Useful for GDPR / DSGVO compliance.',
     'category' => 'services',
     'author' => 'Felix Nagel',
     'author_email' => 'info@felixnagel.com',
