@@ -1,0 +1,34 @@
+{
+	"name": "typo3/deletefiles",
+	"type": "typo3-cms-extension",
+	"description": "Scheduler task for deleting old files and folder. Supports FAL. Useful for GDPR / DSGVO compliance.",
+	"keywords": [
+		"TYPO3 CMS",
+		"cleanup",
+		"scheduler",
+		"GDPR",
+		"DSGVO"
+	],
+	"homepage": "https://github.com/fnagel/deletefiles",
+	"support": {
+		"issues": "https://github.com/fnagel/deletefiles/issues"
+	},
+	"authors": [
+		{
+			"name": "Felix Nagel",
+			"email": "info@felixnagel.com",
+			"homepage": "http://www.felixnagel.com",
+			"role": "Developer"
+		}
+	],
+	"license": "GPL-2.0+",
+	"require": {
+		"php": ">=5.4,<7.2",
+		"typo3/cms-core": ">=6.2,<=8.99.99"
+	},
+	"autoload": {
+		"psr-4": {
+			"TYPO3\\DeleteFiles\\": "Classes/"
+		}
+	}
+}
