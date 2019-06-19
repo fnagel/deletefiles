@@ -23,7 +23,7 @@
 	],
 	"license": "GPL-2.0+",
 	"require": {
-		"php": ">=5.4,<7.2",
+		"php": ">=5.4,<7.3",
 		"typo3/cms-core": ">=6.2,<=8.99.99"
 	},
 	"autoload": {
