@@ -1,6 +1,6 @@
 <?php
 
-namespace TYPO3\DeleteFiles\Task;
+namespace FelixNagel\DeleteFiles\Task;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
@@ -28,7 +28,7 @@ class DeleteFilesAdditionalFieldProvider implements \TYPO3\CMS\Scheduler\Additio
      * Gets additional fields to render in the form to add/edit a task.
      *
      * @param array $taskInfo Values of the fields from the add/edit task form
-     * @param \TYPO3\DeleteFiles\Task\DeleteFilesTask $task The task object
+     * @param \FelixNagel\DeleteFiles\Task\DeleteFilesTask $task The task object
      * @param \TYPO3\CMS\Scheduler\Controller\SchedulerModuleController $schedulerModule
      *
      * @return array

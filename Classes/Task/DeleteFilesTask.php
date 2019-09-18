@@ -1,6 +1,6 @@
 <?php
 
-namespace TYPO3\DeleteFiles\Task;
+namespace FelixNagel\DeleteFiles\Task;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
