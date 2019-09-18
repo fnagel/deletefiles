@@ -51,7 +51,7 @@ class DeleteFilesAdditionalFieldProvider implements \TYPO3\CMS\Scheduler\Additio
 
         if (empty($taskInfo['deletefiles_time'])) {
             if ($schedulerModule->CMD == 'add') {
-                $taskInfo['deletefiles_time'] = array();
+                $taskInfo['deletefiles_time'] = [];
             } elseif ($schedulerModule->CMD == 'edit') {
                 $taskInfo['deletefiles_time'] = $task->deletefiles_time;
             } else {
@@ -74,12 +74,12 @@ class DeleteFilesAdditionalFieldProvider implements \TYPO3\CMS\Scheduler\Additio
         $fieldCode = '<input type="text" name="tx_scheduler[deletefiles_directory]" id="'.$fieldId.'" value="'.
             htmlspecialchars($taskInfo['deletefiles_directory']).'">';
 
-        $additionalFields[$fieldId] = array(
+        $additionalFields[$fieldId] = [
             'code' => $fieldCode,
             'label' => BackendUtility::wrapInHelp('deletefiles', $fieldId, $this->translate('addfields_label_directory')),
             'cshKey' => '_MOD_tools_txschedulerM1',
             'cshLabel' => $fieldId,
-        );
+        ];
 
         // render time field
         $fieldId = 'task_deletefiles_time';
@@ -93,12 +93,12 @@ class DeleteFilesAdditionalFieldProvider implements \TYPO3\CMS\Scheduler\Additio
         }
         $fieldCode .= '</select>';
 
-        $additionalFields[$fieldId] = array(
+        $additionalFields[$fieldId] = [
             'code' => $fieldCode,
             'label' => BackendUtility::wrapInHelp('deletefiles', $fieldId, $this->translate('addfields_label_time')),
             'cshKey' => '_MOD_tools_txschedulerM1',
             'cshLabel' => $fieldId,
-        );
+        ];
 
         // render method field
         $fieldId = 'task_deletefiles_method';
@@ -111,12 +111,12 @@ class DeleteFilesAdditionalFieldProvider implements \TYPO3\CMS\Scheduler\Additio
         }
         $fieldCode .= '</select>';
 
-        $additionalFields[$fieldId] = array(
+        $additionalFields[$fieldId] = [
             'code' => $fieldCode,
             'label' => BackendUtility::wrapInHelp('deletefiles', $fieldId, $this->translate('addfields_label_method')),
             'cshKey' => '_MOD_tools_txschedulerM1',
             'cshLabel' => $fieldId,
-        );
+        ];
 
         return $additionalFields;
     }
@@ -128,7 +128,7 @@ class DeleteFilesAdditionalFieldProvider implements \TYPO3\CMS\Scheduler\Additio
      */
     public function getTimes()
     {
-        return array(
+        return [
             '0' => $this->translate('addfields_time_all'),
             '1h' => '1 '.$this->translate('addfields_time_h'),
             '6h' => '6 '.$this->translate('addfields_time_h'),
@@ -142,7 +142,7 @@ class DeleteFilesAdditionalFieldProvider implements \TYPO3\CMS\Scheduler\Additio
             '3m' => '3 '.$this->translate('addfields_time_m'),
             '6m' => '6 '.$this->translate('addfields_time_m'),
             '12m' => '12 '.$this->translate('addfields_time_m'),
-        );
+        ];
     }
 
     /**
@@ -152,13 +152,13 @@ class DeleteFilesAdditionalFieldProvider implements \TYPO3\CMS\Scheduler\Additio
      */
     public function getMethods()
     {
-        return array(
+        return [
             'delete_directory' => $this->translate('addfields_method_delete_directory'),
             'delete_files' => $this->translate('addfields_method_delete_files'),
             'delete_directories' => $this->translate('addfields_method_delete_directories'),
             'delete_all' => $this->translate('addfields_method_delete_all'),
             'delete_all_recursive' => $this->translate('addfields_method_delete_all_recursive'),
-        );
+        ];
     }
 
     /**

@@ -70,8 +70,8 @@ class DeleteFilesTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
      */
     protected function startCleaning()
     {
-        $items = array();
-        $itemsToDelete = array();
+        $items = [];
+        $itemsToDelete = [];
         $path = PATH_site.trim($this->deletefiles_directory, DIRECTORY_SEPARATOR);
 
         // get needed dirs and files
