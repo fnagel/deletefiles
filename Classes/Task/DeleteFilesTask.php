@@ -346,18 +346,12 @@ class DeleteFilesTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
 
     /**
      * @param $msg
-     * @param int $status
      */
-    protected function log($msg, $status = 1)
+    protected function log($msg)
     {
-        // higher status for debugging
         if ($this->debugging) {
             \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($msg);
-            $status = 3;
-        }
-        // write dev log if enabled
-        if (TYPO3_DLOG) {
-            GeneralUtility::devLog($msg, 'deletefiles', $status);
+            GeneralUtility::devLog($msg, 'deletefiles', 3);
         }
     }
 }
