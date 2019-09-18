@@ -29,7 +29,7 @@ EXT: Delete old files
         forAdmins, task, scheduler, auto, delete, files, clean
 
     :Copyright:
-        2010-2016
+        2010-2019
 
     :Author:
         Felix Nagel
