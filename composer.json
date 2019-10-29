@@ -34,7 +34,6 @@
 		}
 	},
 	"replace": {
-		"deletefiles": "self.version",
 		"typo3-ter/deletefiles": "self.version"
 	},
 	"repositories": [
