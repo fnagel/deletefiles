@@ -9,9 +9,11 @@
 		"GDPR",
 		"DSGVO"
 	],
-	"homepage": "https://github.com/fnagel/deletefiles",
+	"homepage": "https://extensions.typo3.org/extension/deletefiles/",
 	"support": {
-		"issues": "https://github.com/fnagel/deletefiles/issues"
+		"issues": "https://github.com/fnagel/deletefiles/issues",
+		"docs": "https://docs.typo3.org/typo3cms/extensions/deletefiles/",
+		"source": "https://github.com/fnagel/deletefiles"
 	},
 	"authors": [
 		{
