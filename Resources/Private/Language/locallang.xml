@@ -22,7 +22,7 @@
 			<label index="addfields_method_delete_files">All old files</label>
 			<label index="addfields_method_delete_directories">All old directories (checks first level only, deletes recursive)</label>			
 			<label index="addfields_method_delete_all">All old files and directories (checks first level only, deletes recursive)</label>
-			<label index="addfields_method_delete_all_recursive">All old files and directories (checks age of all files and directories recursive, ALPHA!)</label>
+			<label index="addfields_method_delete_all_recursive">All old files and directories (checks age of all files and directories recursive)</label>
 			
 			<label index="addfields_notice_path_invalid">Path invalid: please check the path again!</label>
 		</languageKey>
@@ -43,7 +43,7 @@
 			<label index="addfields_method_delete_files">Alle alten Dateien</label>
 			<label index="addfields_method_delete_directories">Alle alten Ordner (prüft nur die erste Ebene, löscht rekursiv)</label>			
 			<label index="addfields_method_delete_all">Alle alten Dateien und Ordner (prüft nur die erste Ebene, löscht rekursiv)</label>
-			<label index="addfields_method_delete_all_recursive">Alle alten Dateien und Ordner (prüft das Alter aller Dateien und Ordner rekursiv, ALPHA!)</label>
+			<label index="addfields_method_delete_all_recursive">Alle alten Dateien und Ordner (prüft das Alter aller Dateien und Ordner rekursiv)</label>
 			
 			<label index="addfields_notice_path_invalid">Pfad ungültig: bitte kontrolliere den Pfad!</label>
 		</languageKey>
