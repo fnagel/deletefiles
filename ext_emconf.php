@@ -18,7 +18,6 @@ $EM_CONF[$_EXTKEY] = [
     'author_email' => 'info@felixnagel.com',
     'state' => 'stable',
     'uploadfolder' => 0,
-    'createDirs' => '',
     'clearCacheOnLoad' => 0,
     'version' => '1.0.4-dev',
     'constraints' => [
