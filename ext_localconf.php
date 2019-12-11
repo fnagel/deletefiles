@@ -5,8 +5,8 @@ if (!defined('TYPO3_MODE')) {
 }
 
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['scheduler']['tasks']['FelixNagel\\DeleteFiles\\Task\\DeleteFilesTask'] = [
-    'extension' => $_EXTKEY,
-    'title' => 'LLL:EXT:'.$_EXTKEY.'/Resources/Private/Language/locallang.xml:localconf_title',
-    'description' => 'LLL:EXT:'.$_EXTKEY.'/Resources/Private/Language/locallang.xml:localconf_description',
+    'extension' => 'deletefiles',
+    'title' => 'LLL:EXT:deletefiles/Resources/Private/Language/locallang.xml:localconf_title',
+    'description' => 'LLL:EXT:deletefiles/Resources/Private/Language/locallang.xml:localconf_description',
     'additionalFields' => 'FelixNagel\\DeleteFiles\\Task\\DeleteFilesAdditionalFieldProvider',
 ];
