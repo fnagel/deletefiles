@@ -12,11 +12,12 @@ namespace FelixNagel\DeleteFiles\Task;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
+use TYPO3\CMS\Scheduler\AbstractAdditionalFieldProvider;
 
 /**
  * Class DeleteFilesAdditionalFieldProvider.
  */
-class DeleteFilesAdditionalFieldProvider implements \TYPO3\CMS\Scheduler\AdditionalFieldProviderInterface
+class DeleteFilesAdditionalFieldProvider extends AbstractAdditionalFieldProvider
 {
     /**
      * @var \TYPO3\CMS\Lang\LanguageService
@@ -187,7 +188,7 @@ class DeleteFilesAdditionalFieldProvider implements \TYPO3\CMS\Scheduler\Additio
         $publicPath = DeleteFilesTask::getPublicPath();
 
         if (!(strlen($path) > 0 && is_dir($publicPath.$path) && GeneralUtility::isAllowedAbsPath($publicPath.$path))) {
-            $schedulerModule->addMessage(
+            $this->addMessage(
                 sprintf($this->translate('addfields_notice_path_invalid'), $path),
                 FlashMessage::ERROR
             );
