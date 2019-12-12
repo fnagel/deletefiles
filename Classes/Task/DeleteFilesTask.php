@@ -63,11 +63,12 @@ class DeleteFilesTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
     public function isPathValid()
     {
         $path = $this->deletefiles_directory;
+        $publicPath = self::getPublicPath();
 
         return
             strlen($path) > 0 &&
-            file_exists(PATH_site.$path) &&
-            GeneralUtility::isAllowedAbsPath(PATH_site.$path) &&
+            file_exists($publicPath.$path) &&
+            GeneralUtility::isAllowedAbsPath($publicPath.$path) &&
             GeneralUtility::validPathStr($path)
         ;
     }
@@ -79,7 +80,7 @@ class DeleteFilesTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
     {
         $items = [];
         $itemsToDelete = [];
-        $path = PATH_site.trim($this->deletefiles_directory, DIRECTORY_SEPARATOR);
+        $path = self::getPublicPath().trim($this->deletefiles_directory, DIRECTORY_SEPARATOR);
 
         // get needed dirs and files
         $addPath = true;
@@ -360,5 +361,21 @@ class DeleteFilesTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
             \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($msg);
             GeneralUtility::devLog($msg, 'deletefiles', 3);
         }
+    }
+
+    /**
+     * @todo Remove this when TYPO3 8.x is no longer supported!
+     *
+     * @return string
+     */
+    public static function getPublicPath()
+    {
+        if (version_compare(TYPO3_version, '9.2', '>=')) {
+            $publicPath = \TYPO3\CMS\Core\Core\Environment::getPublicPath().'/';
+        } else {
+            $publicPath = PATH_site;
+        }
+
+        return $publicPath;
     }
 }
