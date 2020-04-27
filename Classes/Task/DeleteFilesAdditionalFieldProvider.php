@@ -15,6 +15,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Scheduler\AbstractAdditionalFieldProvider;
+use TYPO3\CMS\Scheduler\Controller\SchedulerModuleController;
 
 /**
  * Class DeleteFilesAdditionalFieldProvider.
@@ -38,21 +39,23 @@ class DeleteFilesAdditionalFieldProvider extends AbstractAdditionalFieldProvider
      * Gets additional fields to render in the form to add/edit a task.
      *
      * @param array $taskInfo Values of the fields from the add/edit task form
-     * @param \FelixNagel\DeleteFiles\Task\DeleteFilesTask $task The task object
-     * @param \TYPO3\CMS\Scheduler\Controller\SchedulerModuleController $schedulerModule
+     * @param DeleteFilesTask $task The task object
+     * @param SchedulerModuleController $schedulerModule
      *
      * @return array
      */
     public function getAdditionalFields(
         array &$taskInfo,
         $task,
-        \TYPO3\CMS\Scheduler\Controller\SchedulerModuleController $schedulerModule
+        SchedulerModuleController $schedulerModule
     ) {
+        $action = (string)$schedulerModule->getCurrentAction();
+
         // process fields
         if (empty($taskInfo['deletefiles_directory'])) {
-            if ($schedulerModule->CMD == 'add') {
+            if ($action ===  'add') {
                 $taskInfo['deletefiles_directory'] = '';
-            } elseif ($schedulerModule->CMD == 'edit') {
+            } elseif ($action === 'edit') {
                 $taskInfo['deletefiles_directory'] = $task->deletefiles_directory;
             } else {
                 $taskInfo['deletefiles_directory'] = '';
@@ -60,9 +63,9 @@ class DeleteFilesAdditionalFieldProvider extends AbstractAdditionalFieldProvider
         }
 
         if (empty($taskInfo['deletefiles_time'])) {
-            if ($schedulerModule->CMD == 'add') {
+            if ($action === 'add') {
                 $taskInfo['deletefiles_time'] = [];
-            } elseif ($schedulerModule->CMD == 'edit') {
+            } elseif ($action === 'edit') {
                 $taskInfo['deletefiles_time'] = $task->deletefiles_time;
             } else {
                 $taskInfo['deletefiles_time'] = '';
@@ -70,9 +73,9 @@ class DeleteFilesAdditionalFieldProvider extends AbstractAdditionalFieldProvider
         }
 
         if (empty($taskInfo['deletefiles_method'])) {
-            if ($schedulerModule->CMD == 'add') {
+            if ($action === 'add') {
                 $taskInfo['deletefiles_method'] = 0;
-            } elseif ($schedulerModule->CMD == 'edit') {
+            } elseif ($action === 'edit') {
                 $taskInfo['deletefiles_method'] = $task->deletefiles_method;
             } else {
                 $taskInfo['deletefiles_method'] = 0;
@@ -178,7 +181,7 @@ class DeleteFilesAdditionalFieldProvider extends AbstractAdditionalFieldProvider
      */
     public function validateAdditionalFields(
         array &$submittedData,
-        \TYPO3\CMS\Scheduler\Controller\SchedulerModuleController $schedulerModule
+        SchedulerModuleController $schedulerModule
     ) {
         $validInput = true;
 
