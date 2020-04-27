@@ -9,6 +9,7 @@ namespace FelixNagel\DeleteFiles\Task;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
@@ -186,7 +187,7 @@ class DeleteFilesAdditionalFieldProvider extends AbstractAdditionalFieldProvider
         $submittedData['deletefiles_time'] = trim($submittedData['deletefiles_time']);
 
         $path = $submittedData['deletefiles_directory'];
-        $publicPath = DeleteFilesTask::getPublicPath();
+        $publicPath = Environment::getPublicPath().'/';
 
         if (!(strlen($path) > 0 && is_dir($publicPath.$path) && GeneralUtility::isAllowedAbsPath($publicPath.$path))) {
             $this->addMessage(

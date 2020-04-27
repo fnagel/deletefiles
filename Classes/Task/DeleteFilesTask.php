@@ -9,6 +9,7 @@ namespace FelixNagel\DeleteFiles\Task;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
 
@@ -63,7 +64,7 @@ class DeleteFilesTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
     public function isPathValid()
     {
         $path = $this->deletefiles_directory;
-        $publicPath = self::getPublicPath();
+        $publicPath = Environment::getPublicPath().'/';
 
         return
             strlen($path) > 0 &&
@@ -80,7 +81,7 @@ class DeleteFilesTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
     {
         $items = [];
         $itemsToDelete = [];
-        $path = self::getPublicPath().trim($this->deletefiles_directory, DIRECTORY_SEPARATOR);
+        $path = Environment::getPublicPath().'/'.trim($this->deletefiles_directory, DIRECTORY_SEPARATOR);
 
         // get needed dirs and files
         $addPath = true;
@@ -361,21 +362,5 @@ class DeleteFilesTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
             \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($msg);
             GeneralUtility::devLog($msg, 'deletefiles', 3);
         }
-    }
-
-    /**
-     * @todo Remove this when TYPO3 8.x is no longer supported!
-     *
-     * @return string
-     */
-    public static function getPublicPath()
-    {
-        if (version_compare(TYPO3_version, '9.2', '>=')) {
-            $publicPath = \TYPO3\CMS\Core\Core\Environment::getPublicPath().'/';
-        } else {
-            $publicPath = PATH_site;
-        }
-
-        return $publicPath;
     }
 }
