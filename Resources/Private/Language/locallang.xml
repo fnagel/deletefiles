@@ -18,8 +18,8 @@
 			<label index="addfields_time_d">days</label>
 			<label index="addfields_time_m">months</label>
 			
-			<label index="addfields_method_delete_directory">Complete chosen directory only</label>
-			<label index="addfields_method_delete_files">All old files</label>
+			<label index="addfields_method_delete_directory">All old files and directories (checks given folder only)</label>
+			<label index="addfields_method_delete_files">All old files in given folder</label>
 			<label index="addfields_method_delete_directories">All old directories (checks first level only, deletes recursive)</label>			
 			<label index="addfields_method_delete_all">All old files and directories (checks first level only, deletes recursive)</label>
 			<label index="addfields_method_delete_all_recursive">All old files and directories (checks age of all files and directories recursive)</label>
@@ -39,8 +39,8 @@
 			<label index="addfields_time_d">Tage</label>
 			<label index="addfields_time_m">Monate</label>
 			
-			<label index="addfields_method_delete_directory">Den kompletten ausgewählten Ordner</label>
-			<label index="addfields_method_delete_files">Alle alten Dateien</label>
+			<label index="addfields_method_delete_directory">Alle alten Dateien und Ordner (prüft nur den unter Pfad angegebenen Ordner)</label>
+			<label index="addfields_method_delete_files">Alle alten Dateien im unter Pfad angegebenen Ordner</label>
 			<label index="addfields_method_delete_directories">Alle alten Ordner (prüft nur die erste Ebene, löscht rekursiv)</label>			
 			<label index="addfields_method_delete_all">Alle alten Dateien und Ordner (prüft nur die erste Ebene, löscht rekursiv)</label>
 			<label index="addfields_method_delete_all_recursive">Alle alten Dateien und Ordner (prüft das Alter aller Dateien und Ordner rekursiv)</label>
