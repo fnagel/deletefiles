@@ -303,7 +303,7 @@ class DeleteFilesTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
 
         // Remove file from FAL if indexed
         try {
-            $fileObject = ResourceFactory::getInstance()->retrieveFileOrFolderObject($file);
+            $fileObject = GeneralUtility::makeInstance(ResourceFactory::class)->retrieveFileOrFolderObject($file);
             if ($fileObject !== null) {
                 $fileObject->delete();
             }
