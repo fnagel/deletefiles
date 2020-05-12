@@ -23,6 +23,9 @@ customers by deleting old files in specific intervals. It uses the scheduler del
 This extension was tested carefully on multiple servers and TYPO3 installations and should work as expected.
 I would recommend to do some tests in your specific environment by using the $this->debugging variable.
 
+**Note** :
+This extension will remove a file from FAL index but will NOT check if it's still in use!
+
 **Warning:**
 This script is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
 without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.

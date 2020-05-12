@@ -38,3 +38,7 @@ This will check every single file and directory within the chosen path. It works
 sure every single file, even in a deep folder structure, will be tested. Please note: this
 functionality is still alpha. Use with care and be aware this is a very performance hungry
 operation.
+
+
+**Note** :
+This extension will remove a file from FAL index but will NOT check if it's still in use!
