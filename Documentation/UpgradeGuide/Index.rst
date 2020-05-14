@@ -12,6 +12,23 @@ Upgrade Guide
 
 
 
+Update from 1.0.3 to 1.1.0
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Overview**
+
+* TYPO3 10.4 LTS support
+* PHP 7.3 support
+* Remove TYPO3 8.x support
+* Minor improvements and code clean up
+* Improved documentation
+
+
+**How to upgrade**
+
+* Clear cache in Install Tool
+
+
 Update from 1.0.2 to 1.0.3
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
