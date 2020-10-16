@@ -12,6 +12,14 @@ Upgrade Guide
 
 
 
+Update from 1.1.0 to 1.1.1
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Overview**
+
+* PHP 7.4 support
+
+
 Update from 1.0.3 to 1.1.0
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
