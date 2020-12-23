@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2020-12-23T16:56:08Z">
+		<header/>
+		<body>
+			<trans-unit id="addfields_label_directory">
+				<source>Path:</source>
+			</trans-unit>
+			<trans-unit id="addfields_label_method">
+				<source>What to delete?</source>
+			</trans-unit>
+			<trans-unit id="addfields_label_time">
+				<source>Minimum age of the deleted files / directories:</source>
+			</trans-unit>
+			<trans-unit id="addfields_method_delete_all">
+				<source>All old files and directories (checks first level only, deletes recursive)</source>
+			</trans-unit>
+			<trans-unit id="addfields_method_delete_all_recursive">
+				<source>All old files and directories (checks age of all files and directories recursive)</source>
+			</trans-unit>
+			<trans-unit id="addfields_method_delete_directories">
+				<source>All old directories (checks first level only, deletes recursive)</source>
+			</trans-unit>
+			<trans-unit id="addfields_method_delete_directory">
+				<source>All old files and directories (checks given folder only)</source>
+			</trans-unit>
+			<trans-unit id="addfields_method_delete_files">
+				<source>All old files in given folder</source>
+			</trans-unit>
+			<trans-unit id="addfields_notice_path_invalid">
+				<source>Path invalid: please check the path again!</source>
+			</trans-unit>
+			<trans-unit id="addfields_time_all">
+				<source>No limitation</source>
+			</trans-unit>
+			<trans-unit id="addfields_time_d">
+				<source>days</source>
+			</trans-unit>
+			<trans-unit id="addfields_time_h">
+				<source>hours</source>
+			</trans-unit>
+			<trans-unit id="addfields_time_m">
+				<source>months</source>
+			</trans-unit>
+			<trans-unit id="localconf_description">
+				<source>Deletes old files and directories.</source>
+			</trans-unit>
+			<trans-unit id="localconf_title">
+				<source>Delete old files</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2020-12-23T16:56:08Z">
+		<header/>
+		<body>
+			<trans-unit id="addfields_label_directory">
+				<target>Pfad:</target>
+			</trans-unit>
+			<trans-unit id="addfields_label_method">
+				<target>Was soll im angegebenen Pfad gelöscht werden?</target>
+			</trans-unit>
+			<trans-unit id="addfields_label_time">
+				<target>Mindestalter der zu löschenden Dateien / Ordner</target>
+			</trans-unit>
+			<trans-unit id="addfields_method_delete_all">
+				<target>Alle alten Dateien und Ordner (prüft nur die erste Ebene, löscht rekursiv)</target>
+			</trans-unit>
+			<trans-unit id="addfields_method_delete_all_recursive">
+				<target>Alle alten Dateien und Ordner (prüft das Alter aller Dateien und Ordner rekursiv)</target>
+			</trans-unit>
+			<trans-unit id="addfields_method_delete_directories">
+				<target>Alle alten Ordner (prüft nur die erste Ebene, löscht rekursiv)</target>
+			</trans-unit>
+			<trans-unit id="addfields_method_delete_directory">
+				<target>Alle alten Dateien und Ordner (prüft nur den unter Pfad angegebenen Ordner)</target>
+			</trans-unit>
+			<trans-unit id="addfields_method_delete_files">
+				<target>Alle alten Dateien im unter Pfad angegebenen Ordner</target>
+			</trans-unit>
+			<trans-unit id="addfields_notice_path_invalid">
+				<target>Pfad ungültig: bitte kontrolliere den Pfad!</target>
+			</trans-unit>
+			<trans-unit id="addfields_time_all">
+				<target>Keine Begrenzung</target>
+			</trans-unit>
+			<trans-unit id="addfields_time_d">
+				<target>Tage</target>
+			</trans-unit>
+			<trans-unit id="addfields_time_h">
+				<target>Stunden</target>
+			</trans-unit>
+			<trans-unit id="addfields_time_m">
+				<target>Monate</target>
+			</trans-unit>
+			<trans-unit id="localconf_description">
+				<target>Löscht alte Dateien und Ordner.</target>
+			</trans-unit>
+			<trans-unit id="localconf_title">
+				<target>Alte Dateien löschen</target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
