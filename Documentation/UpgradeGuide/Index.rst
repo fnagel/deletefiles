@@ -12,6 +12,16 @@ Upgrade Guide
 
 
 
+Update from 1.0.3 to 1.0.4
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Overview**
+
+* PHP 7.4 support
+* Improve documentation
+* Code maintenance
+
+
 Update from 1.0.2 to 1.0.3
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
