@@ -16,6 +16,7 @@ use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Scheduler\AbstractAdditionalFieldProvider;
 use TYPO3\CMS\Scheduler\Controller\SchedulerModuleController;
+use TYPO3\CMS\Scheduler\Task\AbstractTask;
 
 /**
  * Class DeleteFilesAdditionalFieldProvider.
@@ -40,7 +41,6 @@ class DeleteFilesAdditionalFieldProvider extends AbstractAdditionalFieldProvider
      *
      * @param array $taskInfo Values of the fields from the add/edit task form
      * @param DeleteFilesTask $task The task object
-     * @param SchedulerModuleController $schedulerModule
      *
      * @return array
      */
@@ -49,6 +49,7 @@ class DeleteFilesAdditionalFieldProvider extends AbstractAdditionalFieldProvider
         $task,
         SchedulerModuleController $schedulerModule
     ) {
+        $additionalFields = [];
         $action = (string)$schedulerModule->getCurrentAction();
 
         // process fields
@@ -104,6 +105,7 @@ class DeleteFilesAdditionalFieldProvider extends AbstractAdditionalFieldProvider
                 (($time == $taskInfo['deletefiles_time']) ? ' selected="selected"' : '').
                 '>'.$label.'</option>';
         }
+
         $fieldCode .= '</select>';
 
         $additionalFields[$fieldId] = [
@@ -122,6 +124,7 @@ class DeleteFilesAdditionalFieldProvider extends AbstractAdditionalFieldProvider
             $fieldCode .= "\t".'<option value="'.htmlspecialchars($method).'"'.
                 (($method == $taskInfo['deletefiles_method']) ? ' selected="selected"' : '').'>'.$label.'</option>';
         }
+
         $fieldCode .= '</select>';
 
         $additionalFields[$fieldId] = [
@@ -206,7 +209,7 @@ class DeleteFilesAdditionalFieldProvider extends AbstractAdditionalFieldProvider
     /**
      * {@inheritdoc}
      */
-    public function saveAdditionalFields(array $submittedData, \TYPO3\CMS\Scheduler\Task\AbstractTask $task)
+    public function saveAdditionalFields(array $submittedData, AbstractTask $task)
     {
         $task->deletefiles_directory = $submittedData['deletefiles_directory'];
         $task->deletefiles_time = $submittedData['deletefiles_time'];

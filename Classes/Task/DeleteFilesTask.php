@@ -12,31 +12,20 @@ namespace FelixNagel\DeleteFiles\Task;
 use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
+use TYPO3\CMS\Scheduler\Task\AbstractTask;
 
 /**
  * Class DeleteFilesTask.
  */
-class DeleteFilesTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
+class DeleteFilesTask extends AbstractTask
 {
-    /**
-     * @var bool
-     */
-    protected $debugging = false;
+    protected bool $debugging = false;
 
-    /**
-     * @var string
-     */
-    public $deletefiles_directory;
+    public ?string $deletefiles_directory = null;
 
-    /**
-     * @var string
-     */
-    public $deletefiles_time;
+    public ?string $deletefiles_time = null;
 
-    /**
-     * @var string
-     */
-    public $deletefiles_method;
+    public ?string $deletefiles_method = null;
 
     /**
      * {@inheritdoc}
@@ -124,6 +113,7 @@ class DeleteFilesTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
                 if ($addPath) {
                     $item = $path.DIRECTORY_SEPARATOR.$item;
                 }
+
                 if (filemtime($item) < $timestamp) {
                     $itemsToDelete[] = $item;
                 }
@@ -132,6 +122,7 @@ class DeleteFilesTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
             if ($addPath) {
                 $items = $this->prefixArrayValues($path.DIRECTORY_SEPARATOR, $items);
             }
+
             $itemsToDelete = $items;
         }
 
@@ -185,7 +176,7 @@ class DeleteFilesTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
         $flag = true;
 
         foreach ($items as $item) {
-            if ($this->debugging === true) {
+            if ($this->debugging) {
                 $this->log('Use delete method ['.$this->deletefiles_method.'] on '.$item);
 
                 return true;
@@ -207,6 +198,7 @@ class DeleteFilesTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
                     } else {
                         $this->deleteSingleFile($item);
                     }
+
                     break;
 
                 // this works because non empty (but old) dirs cant be deleted with rmdir in PHP
@@ -217,6 +209,7 @@ class DeleteFilesTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
                     } else {
                         $this->deleteSingleFile($item);
                     }
+
                     break;
 
                 default:
@@ -348,7 +341,9 @@ class DeleteFilesTask extends \TYPO3\CMS\Scheduler\Task\AbstractTask
      */
     protected function prefixArrayValues($prefix, $array)
     {
-        $callback = create_function('$str', 'return "'.$prefix.'".$str;');
+        $callback = static function ($str) use ($prefix) {
+            return sprintf('%s', $prefix) . $str;
+        };
 
         return array_map($callback, $array);
     }
