@@ -11,6 +11,22 @@ Upgrade Guide
     :depth: 3
 
 
+Update from 1.1.1 to 1.2.0
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Overview**
+
+* TYPO3 11.4 LTS support
+* PHP 8.0 support
+* Remove TYPO3 9.x support
+* Update localization files to XLF format
+* Minor improvements and code clean up
+
+
+**How to upgrade**
+
+* Clear cache in Install Tool
+
 
 Update from 1.1.0 to 1.1.1
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
