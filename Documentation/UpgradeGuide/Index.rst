@@ -11,6 +11,14 @@ Upgrade Guide
     :depth: 3
 
 
+Update from 1.2.0 to 1.2.1
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Overview**
+
+* Removed PHP 7.0-7.3 support
+
+
 Update from 1.1.1 to 1.2.0
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
