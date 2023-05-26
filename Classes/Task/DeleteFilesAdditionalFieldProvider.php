@@ -9,11 +9,11 @@ namespace FelixNagel\DeleteFiles\Task;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
-use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Scheduler\AbstractAdditionalFieldProvider;
 use TYPO3\CMS\Scheduler\Controller\SchedulerModuleController;
 use TYPO3\CMS\Scheduler\Task\AbstractTask;
@@ -199,7 +199,7 @@ class DeleteFilesAdditionalFieldProvider extends AbstractAdditionalFieldProvider
             // @extensionScannerIgnoreLine
             $this->addMessage(
                 sprintf($this->translate('addfields_notice_path_invalid'), $path),
-                FlashMessage::ERROR
+                AbstractMessage::ERROR
             );
             $validInput = false;
         }

@@ -219,67 +219,23 @@ class DeleteFilesTask extends AbstractTask
         return $flag;
     }
 
-    /**
-     * @return bool|int
-     */
-    protected function getTimestamp()
+    protected function getTimestamp(): bool|int
     {
-        $timestamp = false;
-
-        // choose correct time
-        switch ($this->deletefiles_time) {
-            case '1h':
-                $timestamp = mktime(date('H') - 1, date('i'), date('s'), date('m'), date('d'), date('Y'));
-                break;
-
-            case '6h':
-                $timestamp = mktime(date('H') - 6, date('i'), date('s'), date('m'), date('d'), date('Y'));
-                break;
-
-            case '12h':
-                $timestamp = mktime(date('H') - 12, date('i'), date('s'), date('m'), date('d'), date('Y'));
-                break;
-
-            case '24h':
-                $timestamp = mktime(date('H'), date('i'), date('s'), date('m'), date('d') - 1, date('Y'));
-                break;
-
-            case '48h':
-                $timestamp = mktime(date('H'), date('i'), date('s'), date('m'), date('d') - 2, date('Y'));
-                break;
-
-            case '72h':
-                $timestamp = mktime(date('H'), date('i'), date('s'), date('m'), date('d') - 3, date('Y'));
-                break;
-
-            case '7d':
-                $timestamp = mktime(date('H'), date('i'), date('s'), date('m'), date('d') - 7, date('Y'));
-                break;
-
-            case '14d':
-                $timestamp = mktime(date('H'), date('i'), date('s'), date('m'), date('d') - 14, date('Y'));
-                break;
-
-            case '1m':
-                $timestamp = mktime(date('H'), date('i'), date('s'), date('m') - 1, date('d'), date('Y'));
-                break;
-
-            case '3m':
-                $timestamp = mktime(date('H'), date('i'), date('s'), date('m') - 3, date('d'), date('Y'));
-                break;
-
-            case '6m':
-                $timestamp = mktime(date('H'), date('i'), date('s'), date('m') - 6, date('d'), date('Y'));
-                break;
-
-            case '12m':
-                $timestamp = mktime(date('H'), date('i'), date('s'), date('m'), date('d'), date('Y') - 1);
-                break;
-
-            default:
-        }
-
-        return $timestamp;
+        return match ($this->deletefiles_time) {
+            '1h' => mktime(date('H') - 1, date('i'), date('s'), date('m'), date('d'), date('Y')),
+            '6h' => mktime(date('H') - 6, date('i'), date('s'), date('m'), date('d'), date('Y')),
+            '12h' => mktime(date('H') - 12, date('i'), date('s'), date('m'), date('d'), date('Y')),
+            '24h' => mktime(date('H'), date('i'), date('s'), date('m'), date('d') - 1, date('Y')),
+            '48h' => mktime(date('H'), date('i'), date('s'), date('m'), date('d') - 2, date('Y')),
+            '72h' => mktime(date('H'), date('i'), date('s'), date('m'), date('d') - 3, date('Y')),
+            '7d' => mktime(date('H'), date('i'), date('s'), date('m'), date('d') - 7, date('Y')),
+            '14d' => mktime(date('H'), date('i'), date('s'), date('m'), date('d') - 14, date('Y')),
+            '1m' => mktime(date('H'), date('i'), date('s'), date('m') - 1, date('d'), date('Y')),
+            '3m' => mktime(date('H'), date('i'), date('s'), date('m') - 3, date('d'), date('Y')),
+            '6m' => mktime(date('H'), date('i'), date('s'), date('m') - 6, date('d'), date('Y')),
+            '12m' => mktime(date('H'), date('i'), date('s'), date('m'), date('d'), date('Y') - 1),
+            default => false,
+        };
     }
 
     /**
@@ -341,9 +297,7 @@ class DeleteFilesTask extends AbstractTask
      */
     protected function prefixArrayValues($prefix, $array)
     {
-        $callback = static function ($str) use ($prefix) {
-            return sprintf('%s', $prefix) . $str;
-        };
+        $callback = static fn($str): string => sprintf('%s', $prefix) . $str;
 
         return array_map($callback, $array);
     }

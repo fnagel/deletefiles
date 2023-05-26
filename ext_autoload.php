@@ -1,11 +1,15 @@
 <?php
 
+use FelixNagel\DeleteFiles\Task\DeleteFilesTask;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use FelixNagel\DeleteFiles\Task\DeleteFilesAdditionalFieldProvider;
+
 return [
-    FelixNagel\DeleteFiles\Task\DeleteFilesTask::class => TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath(
+    DeleteFilesTask::class => ExtensionManagementUtility::extPath(
         'deletefiles',
         'Classes/Task/DeleteFilesTask.php'
     ),
-    FelixNagel\DeleteFiles\Task\DeleteFilesAdditionalFieldProvider::class => TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath(
+    DeleteFilesAdditionalFieldProvider::class => ExtensionManagementUtility::extPath(
         'deletefiles',
         'Classes/Task/DeleteFilesAdditionalFieldProvider.php'
     ),
