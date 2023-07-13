@@ -13,7 +13,6 @@ use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Scheduler\AbstractAdditionalFieldProvider;
 use TYPO3\CMS\Scheduler\Controller\SchedulerModuleController;
 use TYPO3\CMS\Scheduler\Task\AbstractTask;
@@ -90,9 +89,9 @@ class DeleteFilesAdditionalFieldProvider extends AbstractAdditionalFieldProvider
 
         $additionalFields[$fieldId] = [
             'code' => $fieldCode,
-            'label' => BackendUtility::wrapInHelp('deletefiles', $fieldId, $this->translate('addfields_label_directory')),
-            'cshKey' => '_MOD_tools_txschedulerM1',
-            'cshLabel' => $fieldId,
+            'label' => $this->translate('addfields_label_directory').' TEST',
+            'cshKey' => 'deletefiles',
+            'cshLabel' => 'addfields_label_directory',
         ];
 
         // render time field
@@ -110,8 +109,8 @@ class DeleteFilesAdditionalFieldProvider extends AbstractAdditionalFieldProvider
 
         $additionalFields[$fieldId] = [
             'code' => $fieldCode,
-            'label' => BackendUtility::wrapInHelp('deletefiles', $fieldId, $this->translate('addfields_label_time')),
-            'cshKey' => '_MOD_tools_txschedulerM1',
+            'label' => $this->translate('addfields_label_time'),
+            'cshKey' => 'deletefiles',
             'cshLabel' => $fieldId,
         ];
 
@@ -129,8 +128,8 @@ class DeleteFilesAdditionalFieldProvider extends AbstractAdditionalFieldProvider
 
         $additionalFields[$fieldId] = [
             'code' => $fieldCode,
-            'label' => BackendUtility::wrapInHelp('deletefiles', $fieldId, $this->translate('addfields_label_method')),
-            'cshKey' => '_MOD_tools_txschedulerM1',
+            'label' => $this->translate('addfields_label_method'),
+            'cshKey' => 'deletefiles',
             'cshLabel' => $fieldId,
         ];
 
