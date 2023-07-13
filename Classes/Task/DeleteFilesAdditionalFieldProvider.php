@@ -82,21 +82,22 @@ class DeleteFilesAdditionalFieldProvider extends AbstractAdditionalFieldProvider
             }
         }
 
-        // render directory field
+        // Render directory field
         $fieldId = 'task_deletefiles_directory';
         $fieldCode = '<input type="text" name="tx_scheduler[deletefiles_directory]" id="'.$fieldId.'" value="'.
-            htmlspecialchars($taskInfo['deletefiles_directory']).'">';
+            htmlspecialchars($taskInfo['deletefiles_directory']).'" class="form-control form-control-clearable t3js-clearable">';
 
         $additionalFields[$fieldId] = [
+            'type' => 'input',
             'code' => $fieldCode,
             'label' => $this->translate('addfields_label_directory').' TEST',
             'cshKey' => 'deletefiles',
             'cshLabel' => 'addfields_label_directory',
         ];
 
-        // render time field
+        // Render time field
         $fieldId = 'task_deletefiles_time';
-        $fieldCode = '<select name="tx_scheduler[deletefiles_time]" id="'.$fieldId.'">';
+        $fieldCode = '<select name="tx_scheduler[deletefiles_time]" id="'.$fieldId.'" class="form-select">';
 
         $fieldValueArray = $this->getTimes();
         foreach ($fieldValueArray as $time => $label) {
@@ -108,15 +109,16 @@ class DeleteFilesAdditionalFieldProvider extends AbstractAdditionalFieldProvider
         $fieldCode .= '</select>';
 
         $additionalFields[$fieldId] = [
+            'type' => 'select',
             'code' => $fieldCode,
             'label' => $this->translate('addfields_label_time'),
             'cshKey' => 'deletefiles',
             'cshLabel' => $fieldId,
         ];
 
-        // render method field
+        // Render method field
         $fieldId = 'task_deletefiles_method';
-        $fieldCode = '<select name="tx_scheduler[deletefiles_method]" id="'.$fieldId.'">';
+        $fieldCode = '<select name="tx_scheduler[deletefiles_method]" id="'.$fieldId.'" class="form-select">';
 
         $fieldValueArray = $this->getMethods();
         foreach ($fieldValueArray as $method => $label) {
@@ -127,6 +129,7 @@ class DeleteFilesAdditionalFieldProvider extends AbstractAdditionalFieldProvider
         $fieldCode .= '</select>';
 
         $additionalFields[$fieldId] = [
+            'type' => 'select',
             'code' => $fieldCode,
             'label' => $this->translate('addfields_label_method'),
             'cshKey' => 'deletefiles',
