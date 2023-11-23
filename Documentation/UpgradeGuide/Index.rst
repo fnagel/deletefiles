@@ -11,6 +11,23 @@ Upgrade Guide
     :depth: 3
 
 
+Update from 1.2.2 to 1.3.0
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Overview**
+
+* TYPO3 12 LTS support
+* PHP 8.2 support
+* Remove TYPO3 10.x support
+* Remove PHP 7.x support
+* Minor improvements and code clean up
+
+
+**How to upgrade**
+
+* Clear cache in Install Tool
+
+
 Update from 1.2.1 to 1.2.2
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
