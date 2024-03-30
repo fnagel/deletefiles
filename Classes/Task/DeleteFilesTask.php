@@ -274,7 +274,7 @@ class DeleteFilesTask extends AbstractTask
         $objects = scandir($dir);
 
         foreach ($objects as $object) {
-            if ($object != '.' && $object != '..') {
+            if ($object !== '.' && $object !== '..') {
                 if (filetype($dir.DIRECTORY_SEPARATOR.$object) === 'dir') {
                     $this->recursiveRemoveDirectory($dir.DIRECTORY_SEPARATOR.$object);
                 } else {
