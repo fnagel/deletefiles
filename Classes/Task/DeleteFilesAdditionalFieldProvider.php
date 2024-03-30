@@ -8,7 +8,7 @@ namespace FelixNagel\DeleteFiles\Task;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
-
+use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Localization\LanguageService;
@@ -101,7 +101,7 @@ class DeleteFilesAdditionalFieldProvider extends AbstractAdditionalFieldProvider
 
         $fieldValueArray = $this->getTimes();
         foreach ($fieldValueArray as $time => $label) {
-            $fieldCode .= "\t".'<option value="'.htmlspecialchars($time).'"'.
+            $fieldCode .= '	<option value="'.htmlspecialchars($time).'"'.
                 (($time == $taskInfo['deletefiles_time']) ? ' selected="selected"' : '').
                 '>'.$label.'</option>';
         }
@@ -122,7 +122,7 @@ class DeleteFilesAdditionalFieldProvider extends AbstractAdditionalFieldProvider
 
         $fieldValueArray = $this->getMethods();
         foreach ($fieldValueArray as $method => $label) {
-            $fieldCode .= "\t".'<option value="'.htmlspecialchars($method).'"'.
+            $fieldCode .= '	<option value="'.htmlspecialchars($method).'"'.
                 (($method == $taskInfo['deletefiles_method']) ? ' selected="selected"' : '').'>'.$label.'</option>';
         }
 
@@ -201,7 +201,7 @@ class DeleteFilesAdditionalFieldProvider extends AbstractAdditionalFieldProvider
             // @extensionScannerIgnoreLine
             $this->addMessage(
                 sprintf($this->translate('addfields_notice_path_invalid'), $path),
-                AbstractMessage::ERROR
+                ContextualFeedbackSeverity::ERROR
             );
             $validInput = false;
         }
