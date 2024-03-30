@@ -49,7 +49,7 @@ class DeleteFilesAdditionalFieldProvider extends AbstractAdditionalFieldProvider
         SchedulerModuleController $schedulerModule
     ) {
         $additionalFields = [];
-        $action = (string)$schedulerModule->getCurrentAction();
+        $action = $schedulerModule->getCurrentAction()->value;
 
         // process fields
         if (empty($taskInfo['deletefiles_directory'])) {
