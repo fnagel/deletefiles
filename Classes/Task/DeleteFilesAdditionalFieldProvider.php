@@ -90,7 +90,7 @@ class DeleteFilesAdditionalFieldProvider extends AbstractAdditionalFieldProvider
         $additionalFields[$fieldId] = [
             'type' => 'input',
             'code' => $fieldCode,
-            'label' => $this->translate('addfields_label_directory').' TEST',
+            'label' => $this->translate('addfields_label_directory'),
             'cshKey' => 'deletefiles',
             'cshLabel' => 'addfields_label_directory',
         ];
