@@ -62,6 +62,16 @@ class DeleteFilesAdditionalFieldProvider extends AbstractAdditionalFieldProvider
             }
         }
 
+        if (empty($taskInfo['deletefiles_regex'])) {
+            if ($action === 'add') {
+                $taskInfo['deletefiles_regex'] = '';
+            } elseif ($action === 'edit') {
+                $taskInfo['deletefiles_regex'] = $task->deletefiles_regex;
+            } else {
+                $taskInfo['deletefiles_regex'] = '';
+            }
+        }
+
         if (empty($taskInfo['deletefiles_time'])) {
             if ($action === 'add') {
                 $taskInfo['deletefiles_time'] = [];
@@ -93,6 +103,19 @@ class DeleteFilesAdditionalFieldProvider extends AbstractAdditionalFieldProvider
             'label' => $this->translate('addfields_label_directory'),
             'cshKey' => 'deletefiles',
             'cshLabel' => 'addfields_label_directory',
+        ];
+
+        // Render regex field
+        $fieldId = 'task_deletefiles_regex';
+        $fieldCode = '<input type="text" name="tx_scheduler[deletefiles_regex]" id="'.$fieldId.'" value="'.
+            htmlspecialchars($taskInfo['deletefiles_regex']).'" class="" width="120">';
+
+        $additionalFields[$fieldId] = [
+            'type' => 'input',
+            'code' => $fieldCode,
+            'label' => $this->translate('addfields_label_regex'),
+            'cshKey' => 'deletefiles',
+            'cshLabel' => 'addfields_label_regex',
         ];
 
         // Render time field
@@ -205,7 +228,18 @@ class DeleteFilesAdditionalFieldProvider extends AbstractAdditionalFieldProvider
             );
             $validInput = false;
         }
-
+        $regex = trim($submittedData['deletefiles_regex']);
+        if (!empty($regex)) {
+            @preg_match($regex, '');
+            $error = preg_last_error();
+            if ($error !== PREG_NO_ERROR) {
+                $this->addMessage(
+                    sprintf($this->translate('addfields_notice_regex_invalid'), $regex),
+                    AbstractMessage::ERROR
+                );
+                $validInput = false;
+            }
+        }
         return $validInput;
     }
 
@@ -215,6 +249,7 @@ class DeleteFilesAdditionalFieldProvider extends AbstractAdditionalFieldProvider
     public function saveAdditionalFields(array $submittedData, AbstractTask $task)
     {
         $task->deletefiles_directory = $submittedData['deletefiles_directory'];
+        $task->deletefiles_regex = trim($submittedData['deletefiles_regex']);
         $task->deletefiles_time = $submittedData['deletefiles_time'];
         $task->deletefiles_method = $submittedData['deletefiles_method'];
     }
