@@ -6,6 +6,9 @@
 			<trans-unit id="addfields_label_directory">
 				<source>Path:</source>
 			</trans-unit>
+			<trans-unit id="addfields_label_regex">
+				<source>Regular expression for file and folder name:</source>
+			</trans-unit>
 			<trans-unit id="addfields_label_method">
 				<source>What to delete?</source>
 			</trans-unit>
@@ -29,6 +32,9 @@
 			</trans-unit>
 			<trans-unit id="addfields_notice_path_invalid">
 				<source>Path invalid: please check the path again!</source>
+			</trans-unit>
+			<trans-unit id="addfields_notice_regex_invalid">
+				<source>Regex invalid: please check the regex again!</source>
 			</trans-unit>
 			<trans-unit id="addfields_time_all">
 				<source>No limitation</source>
