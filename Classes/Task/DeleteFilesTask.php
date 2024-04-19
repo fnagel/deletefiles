@@ -23,6 +23,8 @@ class DeleteFilesTask extends AbstractTask
 
     public ?string $deletefiles_directory = null;
 
+    public ?string $deletefiles_regex = null;
+
     public ?string $deletefiles_time = null;
 
     public ?string $deletefiles_method = null;
@@ -146,6 +148,7 @@ class DeleteFilesTask extends AbstractTask
         $text = '';
 
         $text .= $this->deletefiles_directory;
+        $text .= $this->deletefiles_regex;
         $text .= ', '.$this->deletefiles_method;
         $text .= ', '.$this->deletefiles_time;
 
@@ -158,10 +161,12 @@ class DeleteFilesTask extends AbstractTask
     {
         $this->deletefiles_time = strip_tags($this->deletefiles_time);
         $this->deletefiles_directory = strip_tags($this->deletefiles_directory);
+        $this->deletefiles_regex = strip_tags($this->deletefiles_regex);
         $this->deletefiles_method = strip_tags($this->deletefiles_method);
 
         $this->log('$this->time: '.$this->deletefiles_time);
         $this->log('$this->extkey: '.$this->deletefiles_directory);
+        $this->log('$this->regex: '.$this->deletefiles_regex);
         $this->log('$this->method: '.$this->deletefiles_method);
     }
 
@@ -174,12 +179,15 @@ class DeleteFilesTask extends AbstractTask
     {
         // @todo: better delete error handling
         $flag = true;
-
+        $pattern = $this->deletefiles_regex;
         foreach ($items as $item) {
+            $basename = basename($item);
+            if (!empty($pattern) && !empty($basename) && !preg_match($pattern, $basename)) {
+                continue;
+            }
             if ($this->debugging) {
                 $this->log('Use delete method ['.$this->deletefiles_method.'] on '.$item);
-
-                return true;
+                continue;
             }
 
             switch ($this->deletefiles_method) {
