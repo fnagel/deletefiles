@@ -11,6 +11,21 @@ Upgrade Guide
     :depth: 3
 
 
+Update from 1.3.0 to 1.4.0
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Overview**
+
+* TYPO3 13 LTS support
+* PHP 8.3 support
+* Remove TYPO3 11.x and 12.x support
+
+
+**How to upgrade**
+
+* Clear cache in Install Tool
+
+
 Update from 1.2.2 to 1.3.0
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
