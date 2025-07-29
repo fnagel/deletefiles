@@ -108,31 +108,35 @@ class DeleteFilesTask extends AbstractTask
             default:
         }
 
-        // check filetime
-        if ($this->deletefiles_time) {
-            $timestamp = $this->getTimestamp();
-            foreach ($items as $item) {
-                if ($addPath) {
-                    $item = $path.DIRECTORY_SEPARATOR.$item;
-                }
 
-                if (filemtime($item) < $timestamp) {
-                    $itemsToDelete[] = $item;
-                }
-            }
-        } else {
+        $timestamp = $this->getTimestamp();
+        foreach ($items as $item) {
             if ($addPath) {
-                $items = $this->prefixArrayValues($path.DIRECTORY_SEPARATOR, $items);
+                $item = $path.DIRECTORY_SEPARATOR.$item;
             }
 
-            $itemsToDelete = $items;
+            // check filetime
+            if ($timestamp && filemtime($item) >= $timestamp) {
+                $this->log('File or folder is not old enough '.$item);
+                continue;
+            }
+
+            // check regex
+            if (!empty($this->deletefiles_regex) && !empty($basename = basename($item)) &&
+                !preg_match($this->deletefiles_regex, $basename)
+            ) {
+                $this->log('File or folder does not match regex '.$basename);
+                continue;
+            }
+
+            $itemsToDelete[] = $item;
         }
 
         if (count($itemsToDelete) > 0) {
             $flag = $this->deleteItems($itemsToDelete);
         } else {
             $flag = true;
-            $this->log('No old files to delete');
+            $this->log('No old files or folder to delete');
         }
 
         return $flag;
@@ -179,12 +183,8 @@ class DeleteFilesTask extends AbstractTask
     {
         // @todo: better delete error handling
         $flag = true;
-        $pattern = $this->deletefiles_regex;
+
         foreach ($items as $item) {
-            $basename = basename($item);
-            if (!empty($pattern) && !empty($basename) && !preg_match($pattern, $basename)) {
-                continue;
-            }
             if ($this->debugging) {
                 $this->log('Use delete method ['.$this->deletefiles_method.'] on '.$item);
                 continue;
@@ -206,7 +206,6 @@ class DeleteFilesTask extends AbstractTask
                     } else {
                         $this->deleteSingleFile($item);
                     }
-
                     break;
 
                 // this works because non empty (but old) dirs cant be deleted with rmdir in PHP
@@ -217,7 +216,6 @@ class DeleteFilesTask extends AbstractTask
                     } else {
                         $this->deleteSingleFile($item);
                     }
-
                     break;
 
                 default:
@@ -293,21 +291,6 @@ class DeleteFilesTask extends AbstractTask
 
         reset($objects);
         @rmdir($dir);
-    }
-
-    /**
-     * Adds a prefix to every array value.
-     *
-     * @param $prefix
-     * @param $array
-     *
-     * @return array
-     */
-    protected function prefixArrayValues($prefix, $array)
-    {
-        $callback = static fn($str): string => sprintf('%s', $prefix) . $str;
-
-        return array_map($callback, $array);
     }
 
     /**
