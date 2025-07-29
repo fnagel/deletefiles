@@ -8,6 +8,7 @@ namespace FelixNagel\DeleteFiles\Task;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use TYPO3\CMS\Core\Core\Environment;
@@ -108,7 +109,8 @@ class DeleteFilesAdditionalFieldProvider extends AbstractAdditionalFieldProvider
         // Render regex field
         $fieldId = 'task_deletefiles_regex';
         $fieldCode = '<input type="text" name="tx_scheduler[deletefiles_regex]" id="'.$fieldId.'" value="'.
-            htmlspecialchars($taskInfo['deletefiles_regex']).'" class="" width="120">';
+            (isset($taskInfo['deletefiles_regex']) ? htmlspecialchars($taskInfo['deletefiles_regex']) : '').
+            '" class="form-control form-control-clearable t3js-clearable">';
 
         $additionalFields[$fieldId] = [
             'type' => 'input',
@@ -228,6 +230,7 @@ class DeleteFilesAdditionalFieldProvider extends AbstractAdditionalFieldProvider
             );
             $validInput = false;
         }
+
         $regex = trim($submittedData['deletefiles_regex']);
         if (!empty($regex)) {
             @preg_match($regex, '');
@@ -235,7 +238,7 @@ class DeleteFilesAdditionalFieldProvider extends AbstractAdditionalFieldProvider
             if ($error !== PREG_NO_ERROR) {
                 $this->addMessage(
                     sprintf($this->translate('addfields_notice_regex_invalid'), $regex),
-                    AbstractMessage::ERROR
+                    ContextualFeedbackSeverity::ERROR
                 );
                 $validInput = false;
             }
