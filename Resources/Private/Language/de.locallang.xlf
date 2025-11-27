@@ -6,6 +6,9 @@
 			<trans-unit id="addfields_label_directory">
 				<target>Pfad:</target>
 			</trans-unit>
+			<trans-unit id="addfields_label_regex">
+				<target>Regulärer Ausdruck für Datei- und Ordnernamen:</target>
+			</trans-unit>
 			<trans-unit id="addfields_label_method">
 				<target>Was soll im angegebenen Pfad gelöscht werden?</target>
 			</trans-unit>
@@ -29,6 +32,9 @@
 			</trans-unit>
 			<trans-unit id="addfields_notice_path_invalid">
 				<target>Pfad ungültig: bitte kontrolliere den Pfad!</target>
+			</trans-unit>
+			<trans-unit id="addfields_notice_regex_invalid">
+				<target>Regulärer Ausdruck ungültig: bitte kontrolliere den Regulären Ausdruck!</target>
 			</trans-unit>
 			<trans-unit id="addfields_time_all">
 				<target>Keine Begrenzung</target>
