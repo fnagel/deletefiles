@@ -106,7 +106,7 @@ Update from 1.0.2 to 1.0.3
 
 **Update:**
 
- _Sorry, for not making version 1.0.3 a major release as it contained breaking changes._
+   Sorry, for not making version 1.0.3 a major release as it contained breaking changes.
 
 
 **Overview**

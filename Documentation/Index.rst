@@ -27,7 +27,7 @@ EXT: Delete old files
     forAdmins, task, scheduler, auto, delete, files, clean
 
 :Copyright:
-    2010-2024
+    2010-2025
 
 :Author:
     Felix Nagel
