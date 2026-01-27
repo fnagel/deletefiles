@@ -20,8 +20,8 @@ Define the path to clean. No ending slash. Please double check if its correct.
 
 **Regular expression for file and folder name**
 
-Define a regex filter for the file or folder name to be cleaned.
-Example: "/^form_/" will clean folders or files that start with "form_"
+Define a regex filter for the base name of the file or folder (depending on the delete method) to be cleaned.
+Example: "/^form_/" will clean folders or files that start with "form_".
 
 **Minimum age**
 

@@ -11,6 +11,22 @@ Upgrade Guide
     :depth: 3
 
 
+Update from 1.4.0 to 1.5.0
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Overview**
+
+* PHP 8.4 support
+* Regex filter for folder and filenames
+* Migrated docs to PHP rendering
+* Code clean-up
+
+
+**How to upgrade**
+
+* Clear cache in Install Tool
+
+
 Update from 1.3.0 to 1.4.0
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
