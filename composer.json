@@ -26,7 +26,7 @@
 	"license": "GPL-2.0-or-later",
 	"require": {
 		"php": "^8.2",
-		"typo3/cms-core": "^13"
+		"typo3/cms-core": "^14"
 	},
 	"require-dev": {
 		"ssch/typo3-rector": "^2.3"
