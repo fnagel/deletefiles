@@ -19,7 +19,7 @@ use TYPO3\CMS\Scheduler\Task\AbstractTask;
  */
 class DeleteFilesTask extends AbstractTask
 {
-    protected bool $debugging = false;
+    protected static bool $debugging = false;
 
     public ?string $deletefiles_directory = null;
 
@@ -49,10 +49,8 @@ class DeleteFilesTask extends AbstractTask
 
     /**
      * Check if given path is valid.
-     *
-     * @return bool
      */
-    public function isPathValid()
+    public function isPathValid(): bool
     {
         $path = $this->deletefiles_directory;
         $publicPath = Environment::getPublicPath().'/';
@@ -65,10 +63,7 @@ class DeleteFilesTask extends AbstractTask
         ;
     }
 
-    /**
-     * @return bool
-     */
-    protected function startCleaning()
+    protected function startCleaning(): bool
     {
         $items = [];
         $itemsToDelete = [];
@@ -100,14 +95,13 @@ class DeleteFilesTask extends AbstractTask
                 $items = array_reverse(
                     GeneralUtility::getAllFilesAndFoldersInPath($items, $path.DIRECTORY_SEPARATOR, '', true)
                 );
-                // remove last array item as its the input $path
+                // remove last array item as it's the input $path
                 array_pop($items);
                 $addPath = false;
                 break;
 
             default:
         }
-
 
         $timestamp = $this->getTimestamp();
         foreach ($items as $item) {
@@ -117,7 +111,7 @@ class DeleteFilesTask extends AbstractTask
 
             // check filetime
             if ($timestamp && filemtime($item) >= $timestamp) {
-                $this->log('File or folder is not old enough '.$item);
+                $this->log('File or folder is not old enough: '.$item);
                 continue;
             }
 
@@ -125,7 +119,7 @@ class DeleteFilesTask extends AbstractTask
             if (!empty($this->deletefiles_regex) && !empty($basename = basename($item)) &&
                 !preg_match($this->deletefiles_regex, $basename)
             ) {
-                $this->log('File or folder does not match regex '.$basename);
+                $this->log('File or folder does not match regex: '.$basename);
                 continue;
             }
 
@@ -152,16 +146,14 @@ class DeleteFilesTask extends AbstractTask
         $text = '';
 
         $text .= $this->deletefiles_directory;
-        $text .= $this->deletefiles_regex;
+        $text .= '['.$this->deletefiles_regex.']';
         $text .= ', '.$this->deletefiles_method;
         $text .= ', '.$this->deletefiles_time;
 
         return $text;
     }
 
-    /**
-     */
-    protected function cleanValues()
+    protected function cleanValues(): void
     {
         $this->deletefiles_time = strip_tags($this->deletefiles_time);
         $this->deletefiles_directory = strip_tags($this->deletefiles_directory);
@@ -174,18 +166,13 @@ class DeleteFilesTask extends AbstractTask
         $this->log('$this->method: '.$this->deletefiles_method);
     }
 
-    /**
-     * @param array $items
-     *
-     * @return bool
-     */
-    protected function deleteItems($items)
+    protected function deleteItems(array $items): bool
     {
         // @todo: better delete error handling
         $flag = true;
 
         foreach ($items as $item) {
-            if ($this->debugging) {
+            if (static::$debugging) {
                 $this->log('Use delete method ['.$this->deletefiles_method.'] on '.$item);
                 continue;
             }
@@ -246,10 +233,8 @@ class DeleteFilesTask extends AbstractTask
 
     /**
      * Delete single file.
-     *
-     * @param string $file
      */
-    protected function deleteSingleFile($file)
+    protected function deleteSingleFile(string $file): void
     {
         $filename = basename($file);
         if ($filename === '.htaccess' || $filename === '.htpasswd') {
@@ -272,10 +257,8 @@ class DeleteFilesTask extends AbstractTask
 
     /**
      * Delete directory recursive.
-     *
-     * @param string $dir
      */
-    protected function recursiveRemoveDirectory($dir)
+    protected function recursiveRemoveDirectory(string $dir): void
     {
         $objects = scandir($dir);
 
@@ -293,12 +276,9 @@ class DeleteFilesTask extends AbstractTask
         @rmdir($dir);
     }
 
-    /**
-     * @param $msg
-     */
-    protected function log($msg)
+    protected function log(mixed $msg): void
     {
-        if ($this->debugging) {
+        if (static::$debugging) {
             \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($msg);
         }
     }
