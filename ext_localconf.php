@@ -10,4 +10,5 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['scheduler']['tasks'][DeleteFilesTask:
     'title' => 'LLL:EXT:deletefiles/Resources/Private/Language/locallang.xlf:localconf_title',
     'description' => 'LLL:EXT:deletefiles/Resources/Private/Language/locallang.xlf:localconf_description',
     'additionalFields' => DeleteFilesAdditionalFieldProvider::class,
+    'icon' => 'tx-deletefiles-extension',
 ];
