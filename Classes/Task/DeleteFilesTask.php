@@ -282,4 +282,17 @@ class DeleteFilesTask extends AbstractTask
             \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($msg);
         }
     }
+
+    /**
+     * Fixes issue with making the debugging variable static
+     */
+    public function setTaskParameters(array $parameters): void
+    {
+        foreach ($parameters as $key => $value) {
+            // Check for property and static variable
+            if (property_exists($this, $key) && !isset(static::$$key)) {
+                $this->{$key} = $value;
+            }
+        }
+    }
 }
