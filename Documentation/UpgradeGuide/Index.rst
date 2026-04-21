@@ -11,6 +11,20 @@ Upgrade Guide
     :depth: 3
 
 
+Update from 1.5.0 to 1.6.2
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Overview**
+
+* TYPO3 14 LTS support
+* Remove TYPO3 13.x support
+
+
+**How to upgrade**
+
+* Clear cache in Install Tool
+
+
 Update from 1.4.0 to 1.5.0
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
