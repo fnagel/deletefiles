@@ -1,7 +1,7 @@
 {
 	"name": "felixnagel/deletefiles",
 	"type": "typo3-cms-extension",
-	"description": "TYPO3 CMS scheduler task for deleting old files and folder. Supports FAL. Useful for GDPR / DSGVO compliance.",
+	"description": "Delete old files - TYPO3 CMS scheduler task for deleting old files and folder. Supports FAL. Useful for GDPR / DSGVO compliance.",
 	"keywords": [
 		"TYPO3 CMS",
 		"cleanup",
@@ -47,7 +47,11 @@
 	],
 	"extra": {
 		"typo3/cms": {
-			"extension-key": "deletefiles"
+			"extension-key": "deletefiles",
+			"version": "1.6.3+dev",
+			"Package": {
+				"providesPackages": {}
+			}
 		}
 	}
 }
