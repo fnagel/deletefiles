@@ -9,9 +9,9 @@ namespace FelixNagel\DeleteFiles\Task;
  * LICENSE.txt file that was distributed with this source code.
  */
 
-use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Localization\LanguageService;
+use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Scheduler\AbstractAdditionalFieldProvider;
 use TYPO3\CMS\Scheduler\Controller\SchedulerModuleController;
@@ -235,6 +235,7 @@ class DeleteFilesAdditionalFieldProvider extends AbstractAdditionalFieldProvider
             @preg_match($regex, '');
             $error = preg_last_error();
             if ($error !== PREG_NO_ERROR) {
+                // @extensionScannerIgnoreLine
                 $this->addMessage(
                     sprintf($this->translate('addfields_notice_regex_invalid'), $regex),
                     ContextualFeedbackSeverity::ERROR
