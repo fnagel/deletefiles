@@ -56,7 +56,7 @@ class DeleteFilesTask extends AbstractTask
         $publicPath = Environment::getPublicPath().'/';
 
         return
-            strlen($path) > 0 &&
+            (string) $path !== '' &&
             file_exists($publicPath.$path) &&
             GeneralUtility::isAllowedAbsPath($publicPath.$path) &&
             GeneralUtility::validPathStr($path)

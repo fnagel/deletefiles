@@ -221,7 +221,7 @@ class DeleteFilesAdditionalFieldProvider extends AbstractAdditionalFieldProvider
         $path = $submittedData['deletefiles_directory'];
         $publicPath = Environment::getPublicPath().'/';
 
-        if (!(strlen($path) > 0 && is_dir($publicPath.$path) && GeneralUtility::isAllowedAbsPath($publicPath.$path))) {
+        if (!($path !== '' && is_dir($publicPath.$path) && GeneralUtility::isAllowedAbsPath($publicPath.$path))) {
             // @extensionScannerIgnoreLine
             $this->addMessage(
                 sprintf($this->translate('addfields_notice_path_invalid'), $path),
@@ -242,6 +242,7 @@ class DeleteFilesAdditionalFieldProvider extends AbstractAdditionalFieldProvider
                 $validInput = false;
             }
         }
+
         return $validInput;
     }
 
